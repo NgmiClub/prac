@@ -1,0 +1,156 @@
+:root {
+    --bg: #ffe4e1;
+    --card: #fff5ee;
+    --accent: #dc143c;
+    /* crimson */
+    --accent-2: #00ced1;
+    /* dark turquoise */
+    --muted: #8b4513;
+    --shadow: 0 10px 30px rgba(220, 20, 60, 0.2);
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 36px 16px;
+    background: linear-gradient(135deg, #ffe4e1, #fff0f5);
+    color: #8b0000;
+}
+
+.container {
+    width: 100%;
+    max-width: 760px;
+}
+
+.card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+}
+
+.header h1 {
+    margin: 0 0 6px 0;
+    color: var(--accent-2);
+    font-size: 28px;
+}
+
+.tagline {
+    font-size: 14px;
+    color: var(--accent);
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+input[type="datetime-local"] {
+    padding: 9px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: #fff;
+    min-width: 220px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input[type="datetime-local"]:focus {
+    outline: none;
+    border-color: var(--accent-2);
+    box-shadow: 0 0 0 3px rgba(77, 208, 225, 0.2);
+}
+
+button {
+    padding: 9px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(77, 208, 225, 0.2);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #fff;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(77, 208, 225, 0.35);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+button#resetBtn {
+    background: #e0e0e0;
+    color: #121212;
+}
+
+button#startBtn {
+    background: #32cd32;
+    color: white;
+}
+
+.message {
+    height: 22px;
+    margin-bottom: 8px;
+    color: #ff0000;
+    font-weight: 600;
+}
+
+.display {
+    margin-top: 16px;
+    padding: 18px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(255, 111, 97, 0.05), rgba(77, 208, 225, 0.05));
+    display: inline-block;
+    min-width: 280px;
+    font-weight: 700;
+}
+
+#countdownText {
+    font-size: 1.6rem;
+    color: #111;
+    font-family: 'Courier New', monospace;
+}
+
+.note {
+    margin-top: 16px;
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-align: center;
+}

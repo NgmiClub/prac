@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Multiplication Table Generator -Anuj Kothawade 42231</title>
+    <style>
+        :root {
+            --bg: #fdfdfb;
+            --card: #ffffff;
+            --accent: #ff7f50;
+            --accent-dark: #4dd0e1;
+            --muted: #555;
+            --danger: #ef4444;
+            --good: #186835;
+            --radius: 12px;
+            --shadow: 0 6px 20px rgba(77, 208, 225, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 40px 16px;
+            background: linear-gradient(135deg, #ffffc0, #e8f0f8);
+            color: #111;
+        }
+
+        .container {
+            width: 720px;
+            max-width: 95%;
+        }
+
+        .card {
+            background: var(--card);
+            padding: 32px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(41, 209, 231, 0.5);
+        }
+
+        h1 {
+            color: var(--accent);
+            text-shadow: 0 0 6px var(--accent-dark);
+        }
+
+        .author {
+            color: var(--good);
+            margin: 6px 0 18px 0;
+            font-weight: 600;
+            text-shadow: 0 0 4px var(--good);
+        }
+
+        input[type="number"] {
+            padding: 10px 14px;
+            border-radius: var(--radius);
+            border: 1px solid #cfd8dc;
+            width: 160px;
+            background: #f8fafc;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            margin-bottom: 16px;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 8px rgba(255, 127, 80, 0.4);
+        }
+
+        button {
+            background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+            color: #fff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 600;
+            margin: 5px;
+            box-shadow: 0 4px 12px rgba(77, 208, 225, 0.2);
+            transition: transform 0.15s ease, background 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+        }
+
+        button:active {
+            transform: translateY(2px);
+        }
+
+        .warning {
+            color: var(--danger);
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            padding: 8px 10px;
+            border-radius: var(--radius);
+            margin-top: 10px;
+            display: none;
+        }
+
+        .result-list {
+            margin: 10px 0 0 0;
+            padding-left: 0;
+            list-style: none;
+            font-family: monospace;
+            font-size: 15px;
+            color: var(--accent);
+        }
+
+        .result-list li {
+            margin: 4px 0;
+            text-shadow: 0 0 4px var(--accent-dark);
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <div class="card">
+            <h1>Multiplication Table Generator ⚡</h1>
+            <p class="author">Created by <strong>Anuj Kothawade — 42231</strong></p>
+
+            <input id="number" type="number" placeholder="Enter a number" />
+
+            <div>
+                <button id="forBtn">For Loop</button>
+                <button id="whileBtn">While Loop</button>
+                <button id="doWhileBtn">Do While Loop</button>
+            </div>
+
+            <div id="warning" class="warning"></div>
+
+            <section>
+                <ul id="result" class="result-list"></ul>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        const numberEl = document.getElementById("number");
+        const resultList = document.getElementById("result");
+        const warning = document.getElementById("warning");
+
+        function showWarning(msg) {
+            warning.textContent = msg;
+            warning.style.display = "block";
+        }
+
+        function hideWarning() {
+            warning.textContent = "";
+            warning.style.display = "none";
+        }
+
+        function clearResults() {
+            resultList.innerHTML = "";
+        }
+
+        function generateTable(loopType) {
+            hideWarning();
+            clearResults();
+            const n = parseInt(numberEl.value, 10);
+
+            if (isNaN(n)) {
+                showWarning("Please enter a valid number.");
+                return;
+            }
+
+            if (n === 0) {
+                showWarning("0 is not allowed. Please enter a positive or negative number.");
+                return;
+            }
+
+            let i = 1;
+
+            if (loopType === "for") {
+                for (i = 1; i <= 10; i++) {
+                    const li = document.createElement("li");
+                    li.textContent = `${n} x ${i} = ${n * i}`;
+                    resultList.appendChild(li);
+                }
+            } else if (loopType === "while") {
+                i = 1;
+                while (i <= 10) {
+                    const li = document.createElement("li");
+                    li.textContent = `${n} x ${i} = ${n * i}`;
+                    resultList.appendChild(li);
+                    i++;
+                }
+            } else if (loopType === "doWhile") {
+                i = 1;
+                do {
+                    const li = document.createElement("li");
+                    li.textContent = `${n} x ${i} = ${n * i}`;
+                    resultList.appendChild(li);
+                    i++;
+                } while (i <= 10);
+            }
+        }
+
+        document.getElementById("forBtn").addEventListener("click", () => generateTable("for"));
+        document.getElementById("whileBtn").addEventListener("click", () => generateTable("while"));
+        document.getElementById("doWhileBtn").addEventListener("click", () => generateTable("doWhile"));
+    </script>
+</body>
+
+</html>

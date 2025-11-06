@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>🗂 Array Manager</title>
+    <link rel="stylesheet" href="./Style.css" />
+</head>
+
+<body>
+    <main class="wrap">
+        <header>
+            <h1>🗂 Array Manager</h1>
+            <p class="tagline">Created by <strong>Amey Ranaware</strong></p>
+        </header>
+
+        <!-- Array display (hidden initially) -->
+        <section id="arraySection" class="card" style="display:none;">
+            <h2>📊 Array Display</h2>
+            <div id="arrayDisplay" class="display">[]</div>
+        </section>
+
+        <section class="card">
+            <h2>1️⃣ Set Array Size</h2>
+            <div class="row">
+                <input id="sizeInput" type="number" min="1" placeholder="Enter array size" />
+                <button id="setSizeBtn">Set ✅</button>
+                <button id="displaySizeBtn">Display Size 📏</button>
+            </div>
+            <div id="sizeMsg" class="msg"></div>
+        </section>
+
+        <section class="card">
+            <h2>2️⃣ Add Elements</h2>
+            <div class="row">
+                <input id="addInput" type="text" placeholder="Enter element to add ✏️" />
+                <button id="addBtn">Add ➕</button>
+            </div>
+            <div id="addMsg" class="msg"></div>
+        </section>
+
+        <section class="card">
+            <h2>3️⃣ Check Element</h2>
+            <div class="row">
+                <input id="checkInput" type="text" placeholder="Value to check 🔍" />
+                <button id="checkBtn">Check ✅</button>
+            </div>
+            <div id="checkMsg" class="msg"></div>
+        </section>
+
+        <section class="card">
+            <h2>4️⃣ Remove Element</h2>
+            <div class="row">
+                <input id="removeInput" type="text" placeholder="Value to remove ❌" />
+                <button id="removeBtn">Remove 🗑️</button>
+                <button id="emptyBtn">Empty Array 🧹</button>
+            </div>
+            <div id="removeMsg" class="msg"></div>
+        </section>
+    </main>
+    <script src="./index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Submitted</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
+      margin: 0;
+    }
+
+    .logout-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      background: #ff7b00;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 0.95rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .logout-btn:hover {
+      background: #ff9f43;
+      transform: scale(1.05);
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px 60px;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      backdrop-filter: blur(8px);
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #a8ff60;
+      letter-spacing: 1px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #f5f5f5;
+      margin-bottom: 30px;
+    }
+
+    .author {
+      margin-top: 10px;
+      font-size: 0.95rem;
+      color: #cfe8ff;
+      letter-spacing: 0.5px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Logout Button at Top -->
+  <button class="logout-btn" id="logoutBtn">Logout</button>
+
+  <div class="container">
+    <h1>✅ Form Submitted Successfully!</h1>
+    <p>Thank you for submitting your information.</p>
+    <div class="author">Designed by <strong>Anuj Kothawade - 42231</strong></div>
+  </div>
+
+  <script>
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      window.location.href = "index.html"; // back to form page
+    });
+  </script>
+</body>
+
+</html>

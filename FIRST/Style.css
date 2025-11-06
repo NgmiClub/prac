@@ -1,0 +1,154 @@
+:root {
+    --card-bg: #fffaf0;
+    --page-bg: #fffacd;
+    --accent: #ff8c00;
+    --accent-hover: #ff6600;
+    --muted: #8b4513;
+    --danger: #ff0000;
+    --radius: 14px;
+    --shadow: 0 4px 12px rgba(255, 140, 0, 0.2);
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background: linear-gradient(135deg, #ffe4b5, #fff8dc);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 48px 16px;
+    color: #8b4513;
+}
+
+.wrapper {
+    width: 480px;
+    max-width: 95%;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+header h1 {
+    margin: 6px 0;
+    font-size: 24px;
+    color: #ff6600;
+}
+
+header p {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 4px 0;
+}
+
+header .author {
+    font-size: 15px;
+    color: #8b4513;
+    margin-bottom: 6px;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.card h3 {
+    margin: 0 0 12px 0;
+    text-align: center;
+    color: var(--accent);
+}
+
+/* MAIN CHANGE: horizontal row layout */
+.row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* optional, allows wrapping on small screens */
+}
+
+label {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+input[type=number] {
+    width: 100px;
+    /* smaller to fit in a line */
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    text-align: center;
+    font-size: 14px;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+input[type=number]:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s, transform 0.1s;
+}
+
+button:hover {
+    background: var(--accent-hover);
+}
+
+button:active {
+    transform: translateY(2px);
+}
+
+.result {
+    margin-top: 10px;
+    font-weight: 600;
+    text-align: center;
+    color: #8b4513;
+    font-size: 15px;
+}
+
+.error {
+    color: var(--danger);
+    font-weight: 600;
+    text-align: center;
+    margin-top: 6px;
+    font-size: 14px;
+}
+
+/* RESPONSIVE: stack vertically on very small screens */
+@media (max-width: 420px) {
+    .row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    input[type=number] {
+        width: 100%;
+    }
+}

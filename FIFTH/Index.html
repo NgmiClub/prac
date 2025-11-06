@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>⏳ Countdown Timer</title>
+    <link rel="stylesheet" href="./Style.css" />
+</head>
+
+<body>
+    <main class="container">
+        <div class="card">
+            <header class="header">
+                <h1>⏳ Countdown Timer</h1>
+                <p class="tagline">Created by <strong>Anuj Kothawade — 42231</strong></p>
+            </header>
+
+            <label for="target">📅 Enter date and time:</label>
+            <div class="controls">
+                <input id="target" type="datetime-local" />
+                <button id="submitBtn">Submit ✅</button>
+                <button id="startBtn" disabled>Start ▶️</button>
+                <button id="resetBtn" disabled>Reset 🔄</button>
+            </div>
+
+            <div id="message" class="message"></div>
+
+            <div id="display" class="display">
+                <span id="countdownText">-- : -- : --</span>
+            </div>
+        </div>
+        <footer class="note">Only non-zero units are shown (e.g., "2d 04:05:06" or "03:21").</footer>
+    </main>
+    <script src="./index.js"></script>
+</body>
+
+</html>

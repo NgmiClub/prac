@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Shape Area Calculator - Anuj Kothawade</title>
+    <link rel="stylesheet" href="./Style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Shape Area Calculator</h1>
+            <p class="author">Developed by <strong>Anuj Kothawade</strong></p>
+            <p>Enter dimensions and click Calculate. Invalid inputs will show an error message.</p>
+        </header>
+
+        <!-- Triangle card -->
+        <section class="card" id="triangleCard">
+            <h3>🔺 Triangle Area (Heron's Formula)</h3>
+            <div class="row">
+                <div>
+                    <label for="a">Side A:</label><br>
+                    <input id="a" type="number" step="any" min="0" value="0">
+                </div>
+                <div>
+                    <label for="b">Side B:</label><br>
+                    <input id="b" type="number" step="any" min="0" value="0">
+                </div>
+                <div>
+                    <label for="c">Side C:</label><br>
+                    <input id="c" type="number" step="any" min="0" value="0">
+                </div>
+                <div>
+                    <button id="calcTriangle">Calculate Triangle Area</button>
+                </div>
+                <div class="result" id="triangleResult" aria-live="polite"></div>
+                <div class="error" id="triangleError" aria-live="assertive"></div>
+            </div>
+        </section>
+
+        <!-- Rectangle card -->
+        <section class="card" id="rectangleCard">
+            <h3>⬛ Rectangle Area</h3>
+            <div class="row">
+                <div>
+                    <label for="length">Length:</label><br>
+                    <input id="length" type="number" step="any" min="0" value="0">
+                </div>
+                <div>
+                    <label for="width">Width:</label><br>
+                    <input id="width" type="number" step="any" min="0" value="0">
+                </div>
+                <div>
+                    <button id="calcRectangle">Calculate Rectangle Area</button>
+                </div>
+                <div class="result" id="rectangleResult"></div>
+                <div class="error" id="rectangleError"></div>
+            </div>
+        </section>
+
+        <!-- Circle card -->
+        <section class="card" id="circleCard">
+            <h3>⚪ Circle Area</h3>
+            <div class="row">
+                <div>
+                    <label for="radius">Radius:</label><br>
+                    <input id="radius" type="number" step="any" min="0" value="0">
+                </div>
+                <div>
+                    <button id="calcCircle">Calculate Circle Area</button>
+                </div>
+                <div class="result" id="circleResult"></div>
+                <div class="error" id="circleError"></div>
+            </div>
+        </section>
+    </div>
+
+    <script src="./app.js" defer></script>
+</body>
+
+</html>

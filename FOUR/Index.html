@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>String Comparison Experiment ✨</title>
+    <link rel="stylesheet" href="./Style.css" />
+</head>
+
+<body>
+    <main class="wrap">
+        <div class="card">
+            <header class="header">
+                <h1>🔤 String Comparison Experiment</h1>
+                <p class="tagline">Created by <strong>Anuj Kothawade — 42231</strong></p>
+            </header>
+
+            <div class="form-row">
+                <label for="str1">📝 String 1:</label>
+                <input id="str1" type="text" placeholder="Enter first string" />
+            </div>
+            <div class="form-row">
+                <label for="str2">📝 String 2:</label>
+                <input id="str2" type="text" placeholder="Enter second string" />
+            </div>
+
+            <div class="actions">
+                <button id="btn-compare">Compare ✅</button>
+                <button id="btn-clear" class="secondary">Clear 🧹</button>
+            </div>
+
+            <div id="warning" class="warning" aria-live="polite"></div>
+
+            <div id="results" class="results" aria-live="polite" hidden>
+                <p>💠 <strong>String 1:</strong> <span id="out-str1"></span></p>
+                <p>💠 <strong>String 2:</strong> <span id="out-str2"></span></p>
+                <p>📏 <strong>Length Comparison:</strong> <span id="out-length"></span></p>
+                <p>⚡ <strong>Loose Equality (==):</strong> <span id="out-loose"></span></p>
+                <p>🔒 <strong>Strict Equality (===):</strong> <span id="out-strict"></span></p>
+                <p>🔤 <strong>Case-Insensitive Equality:</strong> <span id="out-case"></span></p>
+                <p>🌍 <strong>Alphabetical Order (localeCompare):</strong> <span id="out-locale"></span></p>
+            </div>
+
+            <p class="note">Note: localeCompare respects locale. Loose equality uses type coercion (==). Strict equality
+                compares value and type (===). Case-insensitive equality compares strings ignoring letter case (e.g., "qwerty" === "QWERTY").</p>
+        </div>
+    </main>
+    <script src="./index.js"></script>
+</body>
+
+</html>

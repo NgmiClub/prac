@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>String Utilities — Reverse / Palindrome / Replace</title>
+    <link rel="stylesheet" href="./Style.css" />
+</head>
+
+<body>
+    <main class="wrap">
+        <div class="card">
+            <header class="header">
+                <h1>String Utilities</h1>
+                <p class="tagline">Created by <strong>Anuj Kothawade — 42231</strong></p>
+            </header>
+
+            <!-- Reverse -->
+            <div class="block">
+                <h2>🔄 Reverse String</h2>
+                <label for="reverse-input">Input string</label>
+                <input id="reverse-input" type="text" placeholder="Type string to reverse" />
+                <div class="actions">
+                    <button id="btn-reverse">Reverse String</button>
+                    <button class="secondary" id="clear-reverse">Clear</button>
+                </div>
+                <div class="output" id="reverse-output" aria-live="polite"></div>
+            </div>
+            <hr />
+
+            <!-- Palindrome check -->
+            <div class="block">
+                <h2>🔁 Palindrome Check</h2>
+                <label for="palindrome-input">Input string</label>
+                <input id="palindrome-input" type="text" placeholder="Type string to check palindrome" />
+                <div class="actions">
+                    <button id="btn-palindrome">Check Palindrome</button>
+                    <button class="secondary" id="clear-palindrome">Clear</button>
+                </div>
+                <div class="output" id="palindrome-output" aria-live="polite"></div>
+                <div class="muted">Note: Palindrome check is case-insensitive and ignores spaces.</div>
+            </div>
+            <hr />
+
+            <!-- Replace first occurrence -->
+            <div class="block">
+                <h2>✏️ Replace First Occurrence</h2>
+                <label for="replace-first-string">String</label>
+                <input id="replace-first-string" type="text" placeholder="Original string" />
+                <div class="two-col">
+                    <div>
+                        <label for="replace-first-old">Old (to replace)</label>
+                        <input id="replace-first-old" type="text" placeholder="characters to replace (can be group)" />
+                    </div>
+                    <div>
+                        <label for="replace-first-new">New</label>
+                        <input id="replace-first-new" type="text" placeholder="replacement text" />
+                    </div>
+                </div>
+                <div class="actions">
+                    <button id="btn-replace-first">Replace First</button>
+                    <button class="secondary" id="clear-replace-first">Clear</button>
+                </div>
+                <div class="output" id="replace-first-output" aria-live="polite"></div>
+            </div>
+            <hr />
+
+            <!-- Replace all occurrences -->
+            <div class="block">
+                <h2>📝 Replace All Occurrences</h2>
+                <label for="replace-all-string">String</label>
+                <input id="replace-all-string" type="text" placeholder="Original string" />
+                <div class="two-col">
+                    <div>
+                        <label for="replace-all-old">Old (to replace)</label>
+                        <input id="replace-all-old" type="text" placeholder="characters to replace (can be group)" />
+                    </div>
+                    <div>
+                        <label for="replace-all-new">New</label>
+                        <input id="replace-all-new" type="text" placeholder="replacement text" />
+                    </div>
+                </div>
+                <div class="actions">
+                    <button id="btn-replace-all">Replace All</button>
+                    <button class="secondary" id="clear-replace-all">Clear</button>
+                </div>
+                <div class="output" id="replace-all-output" aria-live="polite"></div>
+            </div>
+
+            <p class="footnote">Works with multi-character groups. Empty "old" field will be rejected to avoid
+                accidental infinite replacements.</p>
+        </div>
+    </main>
+    <script src="./index.js"></script>
+</body>
+
+</html>
