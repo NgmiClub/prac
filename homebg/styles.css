@@ -3,7 +3,7 @@
 body {
   font-family: 'Poppins', sans-serif;
   text-align: center;
-  background: #ff95c5;
+  background: #f4f4f9;
   /* default light background for print */
   height: 100vh;
   margin: 0;
@@ -11,16 +11,16 @@ body {
   align-items: center;
   justify-content: center;
   transition: background 0.6s ease;
-  color: #2a1a5e;
+  color: #222;
 }
 
 .container {
-  background: #faf0ff;
+  background: #ffffff;
   padding: 50px 40px;
   border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(138, 43, 226, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
   width: 400px;
-  color: #4a0e4e;
+  color: #222;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,17 +31,17 @@ body {
 h1 {
   font-size: 2rem;
   margin-bottom: 10px;
-  color: #8b008b;
+  color: #0d6efd;
 }
 
 h2 {
   font-size: 1.2rem;
   margin-bottom: 20px;
-  color: #ff4500;
+  color: #198754;
 }
 
 p {
-  color: #8b008b;
+  color: #555;
   margin-bottom: 20px;
 }
 
@@ -51,29 +51,29 @@ button {
   cursor: pointer;
   border: none;
   border-radius: 50px;
-  background: #8b008b;
+  background: #0d6efd;
   color: #fff;
   font-weight: 600;
   letter-spacing: 0.5px;
-  box-shadow: 0 6px 20px rgba(139, 0, 139, 0.3);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   transition: all 0.4s ease;
 }
 
 button:hover {
-  background: #ff1493;
+  background: #0b5ed7;
   transform: scale(1.05);
-  color: #ffd700;
+  color: #ffe600;
 }
 
 input {
   padding: 12px 18px;
   font-size: 1rem;
-  border: 2px solid #8b008b;
+  border: 2px solid #0d6efd;
   border-radius: 8px;
   outline: none;
   width: 80%;
-  background: #f0f8ff;
-  color: #4a0e4e;
+  background: #ffffff;
+  color: #222;
   transition: all 0.3s ease;
 }
 
@@ -82,6 +82,6 @@ input::placeholder {
 }
 
 input:focus {
-  border-color: #ff4500;
-  box-shadow: 0 0 10px #ff4500;
+  border-color: #198754;
+  box-shadow: 0 0 10px #198754;
 }

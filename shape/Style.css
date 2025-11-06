@@ -1,13 +1,13 @@
 :root {
-    --card-bg: #fffaf0;
-    --page-bg: #fffacd;
-    --accent: #ff8c00;
-    --accent-hover: #ff6600;
-    --muted: #8b4513;
-    --danger: #ff0000;
+    --card-bg: #ffffff;
+    --page-bg: #f9fbfd;
+    --accent: #7700ff;
+    --accent-hover: #1e40af;
+    --muted: #6b7280;
+    --danger: #dc2626;
     --radius: 14px;
-    --shadow: 0 4px 12px rgba(255, 140, 0, 0.2);
-    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Montero', system-ui, -apple-system, 'Inter', Roboto, 'Helvetica Neue', Arial;
 }
 
 html,
@@ -17,12 +17,12 @@ body {
 }
 
 body {
-    background: linear-gradient(135deg, #ffe4b5, #fff8dc);
+    background: linear-gradient(135deg, #fffde7, #fff9c4);
     display: flex;
     align-items: flex-start;
     justify-content: center;
     padding: 48px 16px;
-    color: #8b4513;
+    color: #111827;
 }
 
 .wrapper {
@@ -38,7 +38,7 @@ header {
 header h1 {
     margin: 6px 0;
     font-size: 24px;
-    color: #ff6600;
+    color: #111827;
 }
 
 header p {
@@ -49,7 +49,7 @@ header p {
 
 header .author {
     font-size: 15px;
-    color: #8b4513;
+    color: #374151;
     margin-bottom: 6px;
 }
 
@@ -129,7 +129,7 @@ button:active {
     margin-top: 10px;
     font-weight: 600;
     text-align: center;
-    color: #8b4513;
+    color: #111827;
     font-size: 15px;
 }
 

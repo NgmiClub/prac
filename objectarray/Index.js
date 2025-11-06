@@ -19,7 +19,6 @@ function renderArray() {
 arrayDisplay.textContent = JSON.stringify(arr);
 }
 setSizeBtn.addEventListener("click", () => {
-sizeMsg.classList.remove("error");
 const n = parseInt(sizeInput.value, 10);
 if (isNaN(n) || n <= 0) {
 sizeMsg.textContent = "Please enter a valid positive size.";
@@ -29,10 +28,10 @@ return;
 capacity = n;
 arr = [];
 sizeMsg.textContent = `Array size set to ${capacity}.`;
+sizeMsg.classList.remove("error");
 renderArray();
 });
 addBtn.addEventListener("click", () => {
-addMsg.classList.remove("error");
 if (capacity === 0) {
 addMsg.textContent = "Set the size first.";
 addMsg.classList.add("error");
@@ -57,11 +56,11 @@ val = valRaw;
 }
 arr.push(val);
 addMsg.textContent = `Added element at index ${arr.length - 1}.`;
+addMsg.classList.remove("error");
 addInput.value = "";
 renderArray();
 });
 checkBtn.addEventListener("click", () => {
-checkMsg.classList.remove("error");
 const idx = parseInt(checkIndex.value, 10);
 if (isNaN(idx) || idx < 0 || idx >= arr.length) {
 checkMsg.textContent = "Invalid index.";
@@ -74,9 +73,9 @@ checkMsg.textContent = `Element at index ${idx} is an array.`;
 } else {
 checkMsg.textContent = `Element at index ${idx} is not an array.`;
 }
+checkMsg.classList.remove("error");
 });
 removeBtn.addEventListener("click", () => {
-removeMsg.classList.remove("error");
 const idx = parseInt(removeIndex.value, 10);
 if (isNaN(idx) || idx < 0 || idx >= arr.length) {
 removeMsg.textContent = "Invalid index.";
@@ -85,6 +84,7 @@ return;
 }
 const removed = arr.splice(idx, 1);
 removeMsg.textContent = `Removed element ${JSON.stringify(removed[0])} from index ${idx}.`;
+removeMsg.classList.remove("error");
 renderArray();
 });
 renderArray();

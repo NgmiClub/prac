@@ -12,8 +12,11 @@
   const outLength = document.getElementById("out-length");
   const outLoose = document.getElementById("out-loose");
   const outStrict = document.getElementById("out-strict");
-  const outCase = document.getElementById("out-case");
   const outLocale = document.getElementById("out-locale");
+
+  // --- NEW ELEMENT ---
+  // Added the selector for the new span
+  const outLocaleLower = document.getElementById("out-locale-lower");
 
   // Show/hide warning
   function showWarning(msg) {
@@ -73,22 +76,6 @@
       outStrict.textContent = "Error evaluating ===.";
     }
 
-    // Case-insensitive equality
-    try {
-      const caseInsensitiveMatch = s1.toLowerCase() === s2.toLowerCase();
-      if (caseInsensitiveMatch) {
-        if (s1 !== s2) {
-          outCase.textContent = `true (equal when case is ignored: "${s1.toLowerCase()}" === "${s2.toLowerCase()}")`;
-        } else {
-          outCase.textContent = `true (already identical)`;
-        }
-      } else {
-        outCase.textContent = `false`;
-      }
-    } catch (e) {
-      outCase.textContent = "Error evaluating case-insensitive comparison.";
-    }
-
     // localeCompare
     try {
       const cmp = s1.localeCompare(s2);
@@ -103,6 +90,24 @@
       outLocale.textContent = "Error evaluating localeCompare.";
     }
 
+    // --- NEW COMPARISON BLOCK ---
+    // Added logic for lowercase comparison
+    try {
+      const s1Lower = s1.toLowerCase();
+      const s2Lower = s2.toLowerCase();
+      const cmpLower = s1Lower.localeCompare(s2Lower);
+
+      if (cmpLower === 0) {
+        outLocaleLower.textContent = `The lowercase versions ("${s1Lower}" and "${s2Lower}") are the same (0).`;
+      } else if (cmpLower < 0) {
+        outLocaleLower.textContent = `Lowercase "${s1Lower}" comes before lowercase "${s2Lower}" (${cmpLower}).`;
+      } else {
+        outLocaleLower.textContent = `Lowercase "${s1Lower}" comes after lowercase "${s2Lower}" (${cmpLower}).`;
+      }
+    } catch (e) {
+      outLocaleLower.textContent = "Error evaluating lowercase localeCompare.";
+    }
+    
     showResults();
   }
 

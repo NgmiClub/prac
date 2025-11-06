@@ -1,20 +1,20 @@
 :root {
-    --bg: #ffeef7;
-    --card: #fff5f9;
-    --accent: #ff1493;
-    /* deep pink */
-    --accent-dark: #9370db;
-    /* medium purple */
-    --muted: #8b008b;
-    --danger: #ff00ff;
-    --good: #00ff00;
+    --bg: #fdfdfb;
+    --card: #ffffff;
+    --accent: #ff7f50;
+    /* coral */
+    --accent-dark: #4dd0e1;
+    /* teal */
+    --muted: #555;
+    --danger: #ef4444;
+    --good: #22c55e;
     --radius: 12px;
-    --shadow: 0 6px 20px rgba(255, 20, 147, 0.4);
+    --shadow: 0 6px 20px rgba(77, 208, 225, 0.3);
 }
 
 * {
     box-sizing: border-box;
-    font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+    font-family: "Montero", "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 body {
@@ -24,8 +24,8 @@ body {
     align-items: flex-start;
     justify-content: center;
     padding: 40px 16px;
-    background: linear-gradient(135deg, #ffeef7, #fff0f5);
-    color: #8b008b;
+    background: linear-gradient(135deg, #fdfdfb, #e8f0f8);
+    color: #111;
 }
 
 .container {
@@ -57,11 +57,11 @@ body {
 
 .header .author {
     text-align: center;
-    color: #00ff00;
+    color: var(--good);
     margin: 6px 0 18px 0;
     font-weight: 600;
     letter-spacing: 0.5px;
-    text-shadow: 0 0 4px #00ff00;
+    text-shadow: 0 0 4px var(--good);
 }
 
 .form-row {
@@ -81,10 +81,10 @@ label {
 input[type="number"] {
     padding: 10px 14px;
     border-radius: var(--radius);
-    border: 1px solid #dda0dd;
+    border: 1px solid #cfd8dc;
     min-width: 140px;
-    background: #fff0f5;
-    color: #8b008b;
+    background: #f8fafc;
+    color: #111;
     font-size: 14px;
     transition: all 0.2s ease;
 }
@@ -92,7 +92,7 @@ input[type="number"] {
 input[type="number"]:focus {
     outline: none;
     border-color: var(--accent);
-    box-shadow: 0 0 8px rgba(255, 20, 147, 0.5);
+    box-shadow: 0 0 8px rgba(255, 127, 80, 0.4);
 }
 
 button {
@@ -119,7 +119,7 @@ button:active {
 button.secondary {
     background: transparent;
     color: var(--muted);
-    border: 1px solid #dda0dd;
+    border: 1px solid #cfd8dc;
     box-shadow: none;
 }
 
@@ -130,8 +130,8 @@ button.secondary:hover {
 
 .warning {
     color: var(--danger);
-    background: rgba(255, 0, 255, 0.15);
-    border: 1px solid rgba(255, 0, 255, 0.5);
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.4);
     padding: 8px 10px;
     border-radius: var(--radius);
     margin-top: 10px;
@@ -141,15 +141,15 @@ button.secondary:hover {
 section h2 {
     margin-top: 22px;
     margin-bottom: 10px;
-    color: #00ff00;
+    color: var(--good);
     font-size: 20px;
-    text-shadow: 0 0 4px #00ff00;
+    text-shadow: 0 0 4px var(--good);
 }
 
 .result-list {
     margin: 8px 0 0 16px;
     padding-left: 8px;
-    color: #8b008b;
+    color: #111;
 }
 
 .result-list li {
@@ -157,6 +157,6 @@ section h2 {
     line-height: 1.4;
     font-family: monospace;
     font-size: 15px;
-    color: #ff1493;
-    text-shadow: 0 0 4px #9370db;
+    color: var(--accent);
+    text-shadow: 0 0 4px var(--accent-dark);
 }

@@ -45,10 +45,10 @@ document.getElementById('studentForm').addEventListener('submit', function(e) {
     }
 
     // ✅ Mobile Number Validation (10-digit starting 6–9)
-    // if (!mobile || !/^[6-9][0-9]{9}$/.test(mobile)) {
-    //     document.getElementById('mobileError').textContent = "Enter a valid 10-digit mobile number.";
-    //     isValid = false;
-    // }
+    if (!mobile || !/^[6-9][0-9]{9}$/.test(mobile)) {
+        document.getElementById('mobileError').textContent = "Enter a valid 10-digit mobile number.";
+        isValid = false;
+    }
 
     // ✅ Fixed Email Validation (proper regex)
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;

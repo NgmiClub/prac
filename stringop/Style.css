@@ -1,14 +1,14 @@
 :root {
-    --bg: #ffe4e1;
-    --card: #fff5f9;
-    --accent: #ff6347;
-    /* tomato */
-    --accent-2: #9370db;
-    /* medium purple */
-    --muted: #8b008b;
-    --danger: #dc143c;
-    --border: rgba(255, 99, 71, 0.2);
-    --shadow: rgba(147, 112, 219, 0.2);
+    --bg: #fffdfc;
+    --card: #ffffff;
+    --accent: #ff7e5f;
+    /* peach */
+    --accent-2: #6a82fb;
+    /* purple */
+    --muted: #555;
+    --danger: #b83232;
+    --border: rgba(0, 0, 0, 0.08);
+    --shadow: rgba(50, 50, 93, 0.1);
 }
 
 * {
@@ -19,7 +19,7 @@
 body {
     margin: 0;
     min-height: 100vh;
-    background: linear-gradient(135deg, #ffe4e1, #fff0f5, #ffeef7);
+    background: linear-gradient(135deg, #fff5f7, #f3e7e9, #eaf0fb);
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -49,7 +49,7 @@ body {
     margin: 0;
     text-align: center;
     font-size: 28px;
-    color: #ff6347;
+    color: #111;
 }
 
 .tagline {
@@ -74,8 +74,7 @@ input[type="text"] {
     width: 100%;
     padding: 11px 13px;
     border-radius: 8px;
-    border: 1px solid #ffb6c1;
-    background: #fffaf0;
+    border: 1px solid #ccc;
     font-size: 15px;
     margin-bottom: 12px;
     transition: border-color 0.2s, box-shadow 0.2s;
@@ -84,7 +83,7 @@ input[type="text"] {
 input[type="text"]:focus {
     outline: none;
     border-color: var(--accent-2);
-    box-shadow: 0 0 0 2px rgba(147, 112, 219, 0.3);
+    box-shadow: 0 0 0 2px rgba(106, 130, 251, 0.2);
 }
 
 .two-col {
@@ -131,9 +130,9 @@ button.secondary {
     min-height: 38px;
     padding: 10px 12px;
     border-radius: 8px;
-    border: 1px dashed #ffb6c1;
-    background: #fff5f9;
-    color: #8b008b;
+    border: 1px dashed #ccc;
+    background: #fdfdfd;
+    color: #111;
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     white-space: pre-wrap;
     margin-top: 6px;

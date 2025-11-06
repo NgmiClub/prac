@@ -2,7 +2,7 @@ const arg = process.argv.slice(2);
 const num = Number(arg[0]);
 
 if (!num || num === 0) {
-  console.log("⚠️ Please enter a valid number greater than 0");
+  console.log("⚠️ Please enter a valid number other than 0");
   process.exit(); // stops further execution
 }
 
