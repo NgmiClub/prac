@@ -1,0 +1,130 @@
+
+----------------------------------------------------------------------------------
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+
+entity ALU_4 is
+    Port ( A : in  STD_LOGIC_VECTOR (3 downto 0);
+           B : in  STD_LOGIC_VECTOR (3 downto 0);
+           F : in  STD_LOGIC_VECTOR (2 downto 0);
+           Y : out  STD_LOGIC_VECTOR (3 downto 0);
+           C_B : out  STD_LOGIC);
+end ALU_4;
+
+architecture ALU_4_arch of ALU_4 is
+
+
+	SIGNAL RESULT: STD_LOGIC_VECTOR(4 DOWNTO 0):=(OTHERS=>'0');
+	BEGIN
+		PROCESS(A,B,F)
+		BEGIN
+			CASE F IS
+			--6 LOGICAL OPERATIONS , F="000" TO F="101"
+			
+			WHEN "000" => RESULT<= '0' & (A AND B);
+			WHEN "001" => RESULT<= '0' & (A NAND B);
+			WHEN "010" => RESULT<= '0' & (A OR B);
+			WHEN "011" => RESULT<= '0' & (A NOR B);
+			WHEN "100" => RESULT<= '0' & (A XOR B);
+			WHEN "101" => RESULT<= '0' & (A XNOR B);
+			
+			WHEN "110" => RESULT <=('0' & A)+('0' & B);
+				WHEN OTHERS => 
+					IF A < B THEN
+						RESULT <= '0' &(NOT B);
+						RESULT<=RESULT+1;
+						RESULT<=(NOT RESULT) + 1;
+						RESULT<= (NOT(('0' & A) + ('0' &(NOT B)) + 1))+1;
+					ELSE
+						RESULT <= ('0' & A ) - ('0' & B);
+					END IF;
+				END CASE;
+			END PROCESS;
+			
+			Y <= RESULT(3 DOWNTO 0);
+			C_B <= RESULT(4);
+					
+		
+end ALU_4_arch;
+  
+
+Test Bench
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+use IEEE.NUMERIC_STD.ALL;
+ 
+ENTITY ALU_4_TB IS
+END ALU_4_TB;
+ 
+ARCHITECTURE behavior OF ALU_4_TB IS 
+ 
+    -- Component Declaration for the Unit Under Test (UUT)
+ 
+    COMPONENT ALU_4
+    PORT(
+         A : IN  std_logic_vector(3 downto 0);
+         B : IN  std_logic_vector(3 downto 0);
+         F : IN  std_logic_vector(2 downto 0);
+         Y : OUT  std_logic_vector(3 downto 0);
+         C_B : OUT  std_logic
+        );
+    END COMPONENT;
+    
+
+   --Inputs
+   signal A : std_logic_vector(3 downto 0) :=  "1001";
+   signal B : std_logic_vector(3 downto 0) :=  "1011";
+   signal F : std_logic_vector(2 downto 0) := (others => '1');
+
+ 	--Outputs
+   signal Y : std_logic_vector(3 downto 0);
+   signal C_B : std_logic;
+   -- No clocks detected in port list. Replace <clock> below with 
+   -- appropriate port name 
+ 
+  
+ 
+BEGIN
+ 
+	-- Instantiate the Unit Under Test (UUT)
+   uut: ALU_4 PORT MAP (
+          A => A,
+          B => B,
+          F => F,
+          Y => Y,
+          C_B => C_B
+        );
+
+   -- Stimulus process
+   stim_proc_F: process
+   begin		
+     F<=F+1;
+	  WAIT FOR 100 NS;
+   end process;
+
+END;
+
+
+UCF 
+NET "A[3]" LOC = P205;
+NET "A[2]" LOC = P206;
+NET "A[1]" LOC = P203;
+NET "A[0]" LOC = P200;
+NET "B[3]" LOC = P192;
+NET "B[2]" LOC = P193;
+NET "B[1]" LOC = P189;
+NET "B[0]" LOC = P190;
+NET "F[2]" LOC = P179;
+NET "F[1]" LOC = P180;
+NET "F[0]" LOC = P177;
+NET "Y[3]" LOC = P165;
+NET "Y[2]" LOC = P167;
+NET "Y[1]" LOC = P163;
+NET "Y[0]" LOC = P164;
+NET "C_B" LOC = P153;
+

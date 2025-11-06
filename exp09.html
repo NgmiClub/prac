@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Registration</title>
+</head>
+<body>
+    <center>
+  <h2>Student Registration</h2>
+
+  <form id="studentForm" novalidate>
+    <label>First Name *</label><br>
+    <input type="text" id="firstName"><br>
+    <span id="firstNameError"></span><br><br>
+
+    <label>Middle Name *</label><br>
+    <input type="text" id="middleName"><br>
+    <span id="middleNameError"></span><br><br>
+
+    <label>Surname *</label><br>
+    <input type="text" id="surname"><br>
+    <span id="surnameError"></span><br><br>
+
+    <label>Address *</label><br>
+    <input type="text" id="address"><br>
+    <span id="addressError"></span><br><br>
+
+    <label>City *</label><br>
+    <input type="text" id="city"><br>
+    <span id="cityError"></span><br><br>
+
+    <label>State *</label><br>
+    <select id="state">
+      <option value="">Select State</option>
+      <option value="Maharashtra">Maharashtra</option>
+      <option value="Goa">Goa</option>
+      <option value="Gujarat">Gujarat</option>
+      <option value="Madhya Pradesh">Madhya Pradesh</option>
+    </select><br>
+    <span id="stateError"></span><br><br>
+
+    <label>Gender *</label><br>
+    <input type="radio" name="gender" value="Male"> Male
+    <input type="radio" name="gender" value="Female"> Female
+    <input type="radio" name="gender" value="Other"> Other<br>
+    <span id="genderError"></span><br><br>
+
+    <label>Mobile Number *</label><br>
+    <input type="tel" id="mobile" placeholder="10-digit number"><br>
+    <span id="mobileError"></span><br><br>
+
+    <label>Email ID *</label><br>
+    <input type="email" id="email" placeholder="example@mail.com"><br>
+    <span id="emailError"></span><br><br>
+
+    <button type="submit">Submit</button>
+    <button type="button" id="resetBtn">Reset</button>
+  </form>
+    </center>
+  <script>
+    const form = document.getElementById('studentForm');
+    const resetBtn = document.getElementById('resetBtn');
+
+    function clearErrors() {
+      ['firstNameError','middleNameError','surnameError','addressError','cityError',
+       'genderError','stateError','mobileError','emailError']
+      .forEach(id => document.getElementById(id).innerText = '');
+    }
+
+    function isValidName(name) { return /^[A-Za-z]+$/.test(name.trim()); }
+    function isValidMobile(mob) { return /^[789][0-9]{9}$/.test(mob.trim()); }
+    function isValidEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()); }
+    function isValidCity(city) { return /^[A-Za-z\s]+$/.test(city.trim()); }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      clearErrors();
+
+      const f = form.firstName.value.trim(),
+            m = form.middleName.value.trim(),
+            s = form.surname.value.trim(),
+            a = form.address.value.trim(),
+            c = form.city.value.trim(),
+            g = form.gender.value,
+            st = form.state.value,
+            mob = form.mobile.value.trim(),
+            em = form.email.value.trim();
+
+      let valid = true;
+
+      if (!f) { firstNameError.textContent = 'First name required'; valid = false; }
+      else if (!isValidName(f)) { firstNameError.textContent = 'Only letters allowed'; valid = false; }
+
+      if (!m) { middleNameError.textContent = 'Middle name required'; valid = false; }
+      else if (!isValidName(m)) { middleNameError.textContent = 'Only letters allowed'; valid = false; }
+
+      if (!s) { surnameError.textContent = 'Surname required'; valid = false; }
+      else if (!isValidName(s)) { surnameError.textContent = 'Only letters allowed'; valid = false; }
+
+      if (!a) { addressError.textContent = 'Address required'; valid = false; }
+
+      if (!c) { cityError.textContent = 'City required'; valid = false; }
+      else if (!isValidCity(c)) { cityError.textContent = 'Only letters/spaces'; valid = false; }
+
+      if (!g) { genderError.textContent = 'Select gender'; valid = false; }
+
+      if (!st) { stateError.textContent = 'Select state'; valid = false; }
+
+      if (!mob) { mobileError.textContent = 'Mobile required'; valid = false; }
+      else if (!isValidMobile(mob)) { mobileError.textContent = 'Start 7/8/9 & 10 digits'; valid = false; }
+
+      if (!em) { emailError.textContent = 'Email required'; valid = false; }
+      else if (!isValidEmail(em)) { emailError.textContent = 'Invalid email'; valid = false; }
+
+      if (valid) {
+        const fullName = `${f} ${m} ${s}`.replace(/\s+/g,' ').trim();
+        localStorage.setItem('studentName', fullName);
+        window.location.href = 'welcome09.html';
+      }
+    });
+
+    resetBtn.addEventListener('click', () => {
+      form.reset();
+      clearErrors();
+    });
+  </script>
+</body>
+</html>

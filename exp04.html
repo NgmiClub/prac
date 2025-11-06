@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>String Comparison</title>
+</head>
+<body>
+
+    <center>
+        <h2>String Comparison Result</h2>
+        <div>
+            <label for="str1">Enter First String:</label>
+            <input type="text" id="str1" name="str1">
+        </div>
+
+        <div>
+            <label for="str2">Enter Second String:</label>
+            <input type="text" id="str2" name="str2">
+        </div>
+
+        <button onclick="compareStrings()">Compare Strings</button>
+
+        <div id="comparisonResult"></div>
+    </center>
+
+    <script>
+        function compareStrings() {
+            const string1 = document.getElementById('str1').value;
+            const string2 = document.getElementById('str2').value;
+            const resultDiv = document.getElementById('comparisonResult');
+
+            let comparisonResults = '';
+
+            // Method 1: Strict equality
+            const strictEqual = string1 === string2;
+            comparisonResults += `<div class="method">
+              <strong>1. Strict Equality (===):</strong> ${strictEqual ? " Equal" : " Not Equal"}
+            </div>`;
+
+            // Method 2: Loose equality
+            const looseEqual = string1 == string2;
+            comparisonResults += `<div class="method">
+              <strong>2. Loose Equality (==):</strong> ${looseEqual ? " Equal" : " Not Equal"}
+            </div>`;
+
+            // Method 3: Case-insensitive comparison
+            const caseInsensitiveEqual = string1.toLowerCase() === string2.toLowerCase();
+            comparisonResults += `<div class="method">
+              <strong>3. Case-Insensitive:</strong> ${caseInsensitiveEqual ? " Equal" : " Not Equal"}
+            </div>`;
+
+            // Method 4: Using localeCompare
+            const localeResult = string1.localeCompare(string2);
+            let localeMessage = "";
+            if (localeResult === 0) {
+              localeMessage = " Strings are identical";
+            } else if (localeResult < 0) {
+              localeMessage = "First string comes before second alphabetically";
+            } else {
+              localeMessage = "First string comes after second alphabetically";
+            }
+            comparisonResults += `<div class="method">
+              <strong>4. Locale Compare:</strong> ${localeMessage}
+            </div>`;
+
+            // Method 5: Length comparison
+            const lengthEqual = string1.length === string2.length;
+            comparisonResults += `<div class="method">
+              <strong>5. Length Comparison:</strong> ${lengthEqual ? ` Both have ${string1.length} characters` : ` Different lengths (${string1.length} vs ${string2.length})`}
+            </div>`;
+
+            resultDiv.innerHTML = comparisonResults;
+        }
+    </script>
+</body>
+</html>

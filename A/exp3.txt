@@ -1,0 +1,149 @@
+MVM:
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity mod25 is
+    Port (
+        clk : in  STD_LOGIC;
+        dir : in  STD_LOGIC;
+        pr  : in  STD_LOGIC;
+        rst : in  STD_LOGIC;
+        Q   : out STD_LOGIC_VECTOR (4 downto 0)  -- <- 5 bits now
+    );
+end mod25;
+
+architecture mod25arch of mod25 is
+    signal Qtemp : unsigned(4 downto 0) := (others => '0');
+begin
+    process(rst, pr, clk)
+    begin
+        if rst = '1' then
+            Qtemp <= (others => '0');         -- asynchronous reset
+        elsif pr = '1' then
+            Qtemp <= (others => '1');         -- asynchronous preset (all ones -> 31)
+        elsif falling_edge(clk) then
+            if dir = '1' then                 -- count up
+                if Qtemp < to_unsigned(24, Qtemp'length) then
+                    Qtemp <= Qtemp + 1;
+                else
+                    Qtemp <= (others => '0'); -- wrap to 0
+                end if;
+            else                              -- count down
+                if Qtemp > to_unsigned(7, Qtemp'length) then
+                    Qtemp <= Qtemp - 1;
+                else
+                    Qtemp <= (others => '1'); -- wrap to 31 ("11111")
+                end if;
+            end if;
+        end if;
+    end process;
+
+    Q <= std_logic_vector(Qtemp);  -- full 5-bit output
+
+end mod25arch;
+
+
+
+
+
+TVM:
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity mod_25_tvm is
+end mod_25_tvm;
+
+architecture behavior of mod_25_tvm is
+
+    component mod25
+    port(
+        clk : in  std_logic;
+        dir : in  std_logic;
+        pr  : in  std_logic;
+        rst : in  std_logic;
+        Q   : out std_logic_vector(4 downto 0)  -- match updated DUT
+    );
+    end component;
+
+    signal clk : std_logic := '0';
+    signal dir : std_logic := '0';
+    signal pr  : std_logic := '0';
+    signal rst : std_logic := '0';
+    signal Q   : std_logic_vector(4 downto 0);
+
+    constant clk_period : time := 10 ns;
+
+begin
+
+    uut: mod25
+        port map (
+            clk => clk,
+            dir => dir,
+            pr  => pr,
+            rst => rst,
+            Q   => Q
+        );
+
+    -- Clock process
+    clk_process :process
+    begin
+        while true loop
+            clk <= '0';
+            wait for clk_period/2;
+            clk <= '1';
+            wait for clk_period/2;
+        end loop;
+    end process;
+
+    -- Toggle dir every 320 ns (forever)
+    stim_proc_dir: process
+    begin
+        wait for 20 ns;   -- allow some time before first change
+        loop
+            dir <= not dir;
+            wait for 320 ns;
+        end loop;
+    end process;
+
+    -- Reset/preset stimulus (single pulses)
+    stim_proc_rst_pr: process
+    begin
+        -- Start with rst asserted for a short time to ensure known start
+        rst <= '1';
+        pr  <= '0';
+        wait for 40 ns;
+        rst <= '0';
+        wait for 200 ns;
+
+        -- Let counter run; then apply preset (pr) to force 31
+        wait for 500 ns;
+        pr <= '1';
+        wait for 40 ns;
+        pr <= '0';
+
+        -- later apply another reset as example
+        wait for 600 ns;
+        rst <= '1';
+        wait for 40 ns;
+        rst <= '0';
+
+        wait; -- stop stimulus
+    end process;
+
+end behavior;
+
+
+
+
+
+UCF
+NET "Q[4]" LOC = P164; 
+NET "Q[3]" LOC = P162; 
+NET "Q[2]" LOC = P161; 
+NET "Q[1]" LOC = P160; 
+NET "Q[0]" LOC = P153; 
+NET "clk" LOC = P132; 
+NET "dir" LOC = P202; 
+NET "pr" LOC = P204; 
+NET "rst" LOC = P194; 

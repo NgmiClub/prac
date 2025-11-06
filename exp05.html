@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Countdown Timer</title>
+</head>
+<body>
+
+    <center>
+        <h2>Countdown Timer</h2>
+        <div>
+            <label for="dateTimeInput">Select Date and Time:</label>
+            <input type="datetime-local" id="dateTimeInput">
+        </div>
+
+        <button onclick="startCountdown()">Start Countdown</button>
+        <button onclick="resetTimer()">Reset</button>
+
+        <div id="message" style="margin-top: 20px; color: red;"></div>
+        <div id="result" style="margin-top: 20px; font-size: 24px; font-weight: bold;"></div>
+    </center>
+
+    <script>
+        let timerInterval;
+
+        function startCountdown() {
+            const userInput = document.getElementById('dateTimeInput').value;
+            const messageDiv = document.getElementById('message');
+            const resultDiv = document.getElementById('result');
+
+            // Clear previous messages and timer
+            messageDiv.innerHTML = '';
+            resultDiv.innerHTML = '';
+
+            // Validate if input is empty
+            if (userInput === '') {
+                messageDiv.innerHTML = 'Please select a date and time!';
+                return;
+            }
+
+            // Get selected date and current date
+            const targetDate = new Date(userInput);
+            const currentDate = new Date();
+
+            // Check if date is valid
+            if (isNaN(targetDate.getTime())) {
+                messageDiv.innerHTML = 'Invalid date and time. Please select a valid date!';
+                return;
+            }
+
+            // Check if date is in the past
+            if (targetDate < currentDate) {
+                messageDiv.innerHTML = 'The selected date and time is in the past! Please select a future date.';
+                return;
+            }
+
+            // Clear any existing timer
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+
+            // Success message
+            messageDiv.style.color = 'green';
+            messageDiv.innerHTML = 'Countdown started!';
+
+            // Start countdown
+            timerInterval = setInterval(function() {
+                const now = new Date();
+                const distance = targetDate - now;
+
+                // If countdown is finished
+                if (distance < 0) {
+                    clearInterval(timerInterval);
+                    resultDiv.innerHTML = 'COUNTDOWN FINISHED!';
+                    messageDiv.innerHTML = '';
+                    return;
+                }
+
+                // Calculate time units
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Display countdown
+                resultDiv.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }, 1000);
+        }
+
+        function resetTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+            document.getElementById('dateTimeInput').value = '';
+            document.getElementById('message').innerHTML = '';
+            document.getElementById('result').innerHTML = '';
+        }
+    </script>
+</body>
+</html>

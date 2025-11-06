@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Array Manager</title>
+</head>
+<body>
+
+    <center>
+        <h2>🔢Array Manager</h2>
+        
+        <div>
+            <label>Enter array size:</label>
+            <input type="number" id="arraySize" min="1">
+            <button onclick="initializeArray()">Create Array</button>
+        </div>
+        
+        <div>
+            <label>Append element:</label>
+            <input type="text" id="elementInput">
+            <button onclick="appendElement()">Append</button>
+        </div>
+        
+        <div>
+            <label>Search element:</label>
+            <input type="text" id="searchInput">
+            <button onclick="searchElement()">Search</button>
+        </div>
+        
+        <div>
+            <button onclick="reset()">Reset</button>
+        </div>
+
+        <div id="output" style="margin-top: 20px; font-weight: bold;"></div>
+    </center>
+
+    <script>
+        let arr = [];
+        let maxSize = 0;
+
+        function initializeArray() {
+            const sizeInput = document.getElementById('arraySize').value.trim();
+            const outputDiv = document.getElementById('output');
+            
+            if (sizeInput === '') {
+                outputDiv.style.color = 'red';
+                outputDiv.innerText = 'Please enter array size.';
+                return;
+            }
+            
+            maxSize = parseInt(sizeInput);
+            
+            if (isNaN(maxSize) || maxSize <= 0) {
+                outputDiv.style.color = 'red';
+                outputDiv.innerText = 'Please enter a valid positive number for array size.';
+                return;
+            }
+            
+            arr = [];
+            outputDiv.style.color = 'green';
+            outputDiv.innerText = `Array initialized with size ${maxSize}.`;
+        }
+
+        function appendElement() {
+            const element = document.getElementById('elementInput').value.trim();
+            const outputDiv = document.getElementById('output');
+            
+            if (element === '') {
+                outputDiv.style.color = 'red';
+                outputDiv.innerText = 'Please enter an element to append.';
+                return;
+            }
+            
+            if (maxSize === 0) {
+                outputDiv.style.color = 'red';
+                outputDiv.innerText = 'Please create array first by entering array size.';
+                return;
+            }
+            
+            if (arr.length < maxSize) {
+                arr.push(element);
+                outputDiv.style.color = 'green';
+                outputDiv.innerText = `Element "${element}" added. Current array: [${arr.join(", ")}]`;
+                document.getElementById('elementInput').value = '';
+            } else {
+                outputDiv.style.color = 'orange';
+                outputDiv.innerText = '⚠️Array is overloaded! Cannot add more elements.';
+            }
+        }
+
+        function searchElement() {
+            const indexInput = document.getElementById('searchInput').value.trim();
+            const outputDiv = document.getElementById('output');
+            
+            if (indexInput === '') {
+                outputDiv.style.color = 'red';
+                outputDiv.innerText = 'Please enter an index to search.';
+                return;
+            }
+            
+            const index = parseInt(indexInput);
+            
+            if (isNaN(index)) {
+                outputDiv.style.color = 'red';
+                outputDiv.innerText = 'Please enter a valid number for index.';
+                return;
+            }
+            
+            if (Array.isArray(arr)) {
+                const result = arr[index];
+                if (result !== undefined) {
+                    outputDiv.style.color = 'green';
+                    outputDiv.innerText = `✅Element at index ${index} is "${result}".`;
+                } else {
+                    outputDiv.style.color = 'red';
+                    outputDiv.innerText = `❌No element found at index ${index}. (undefined)`;
+                }
+            } else {
+                outputDiv.style.color = 'red';
+                outputDiv.innerText = 'Array is not valid.';
+            }
+        }
+
+        function reset() {
+            location.reload();
+        }
+    </script>
+</body>
+</html>

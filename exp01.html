@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Exp-01 Area Calculator</title>
+
+</head>
+<body>
+    <center>
+        <div>
+            <h2>Area Calculator</h2>
+            <!-- Circle Area Calculation -->
+             <div>
+                <h3>Circle</h3>
+                <label for="radius">Radius:</label>
+                <input type="number" id="radius" placeholder="Enter radius(cm)">
+                <div>
+                    <button onclick="calculateCircleArea()">Calculate Area</button>
+                    <button onclick="resetCircleCalculator()">Reset</button>
+                    <div id="circleAreaResult"></div>
+                </div>
+             </div>
+            <br>
+
+            <!-- Rectangle Area Calculation -->
+            <div>   
+                <h3>Rectangle</h3>
+                <label for="length">Length:</label>
+                <input type="number" id="length" placeholder="Enter length(cm)">
+                <label for="width">Width:</label>
+                <input type="number" id="width" placeholder="Enter width(cm)">
+                <div>
+                    <button onclick="calculateRectangleArea()">Calculate Area</button>
+                    <button onclick="resetRectangleCalculator()">Reset</button>
+                    <div id="rectangleAreaResult"></div>
+                </div>
+            </div>
+            <br>
+
+            <!-- Triangle Area Calculation using heron formula -->
+            </div>
+                <h3>Triangle</h3>
+                <label for="sideA">Side A:</label>
+                <input type="number" id="sideA" placeholder="Enter side A(cm)">
+                <label for="sideB">Side B:</label>
+                <input type="number" id="sideB" placeholder="Enter side B(cm)">
+                <label for="sideC">Side C:</label>
+                <input type="number" id="sideC" placeholder="Enter side C(cm)">
+                <div>
+                    <button onclick="calculateTriangleArea()">Calculate Area</button>
+                    <button onclick="resetTriangleCalculator()">Reset</button>
+                    <div id="triangleAreaResult"></div>
+                </div>
+            </div>
+        </div>
+    </center>
+
+    <!-- Link to inline JavaScript -->
+    <script>
+        // Function to calculate area of circle
+        function calculateCircleArea() {
+            const radius = parseFloat(document.getElementById('radius').value);
+            if (isNaN(radius) || radius <= 0) {
+                document.getElementById('circleAreaResult').innerText = 'Please enter a valid positive number for radius.';
+                return;
+            }
+            const area = Math.PI * Math.pow(radius, 2);
+            document.getElementById('circleAreaResult').innerText = `Area of Circle: ${area.toFixed(2)} cm²`;
+        }
+
+        // Function to reset circle calculator
+        function resetCircleCalculator() {
+            document.getElementById('radius').value = '';
+            document.getElementById('circleAreaResult').innerText = '';
+        }
+    
+        // Function to calculate area of rectangle
+        function calculateRectangleArea() {
+            const length = parseFloat(document.getElementById('length').value);
+            const width = parseFloat(document.getElementById('width').value);
+            if (isNaN(length) || length <= 0 || isNaN(width) || width <= 0) {
+                document.getElementById('rectangleAreaResult').innerText = 'Please enter valid positive numbers for length and width.';
+                return;
+            }
+            const area = length * width;
+            document.getElementById('rectangleAreaResult').innerText = `Area of Rectangle: ${area.toFixed(2)} cm²`;
+        }
+
+        // Function to reset rectangle calculator
+        function resetRectangleCalculator() {
+            document.getElementById('length').value = '';
+            document.getElementById('width').value = '';
+            document.getElementById('rectangleAreaResult').innerText = '';
+        }
+
+        // Function to calculate area of triangle using Heron's formula
+        function calculateTriangleArea() {
+            const sideA = parseFloat(document.getElementById('sideA').value);
+            const sideB = parseFloat(document.getElementById('sideB').value);
+            const sideC = parseFloat(document.getElementById('sideC').value);
+            if (isNaN(sideA) || sideA <= 0 || isNaN(sideB) || sideB <= 0 || isNaN(sideC) || sideC <= 0) {
+                document.getElementById('triangleAreaResult').innerText = 'Please enter valid positive numbers for all sides.';
+                return;
+            }
+            // Check if the sides can form a valid triangle (Triangle Inequality Theorem)
+            if (sideA + sideB <= sideC || sideB + sideC <= sideA || sideA + sideC <= sideB) {
+                document.getElementById('triangleAreaResult').innerHTML = `The entered sides do not form a valid triangle.`;
+                return;
+            }
+            const s = (sideA + sideB + sideC) / 2; // Semi-perimeter
+            const area = Math.sqrt(s * (s - sideA) * (s - sideB) * (s - sideC)); // Heron's formula
+            document.getElementById('triangleAreaResult').innerText = `Area of Triangle: ${area.toFixed(2)} cm²`;
+        }
+
+        // Function to reset triangle calculator
+        function resetTriangleCalculator() {
+            document.getElementById('sideA').value = '';
+            document.getElementById('sideB').value = '';
+            document.getElementById('sideC').value = '';
+            document.getElementById('triangleAreaResult').innerText = '';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Array Operations</title>
+</head>
+<body>
+
+    <center>
+        <h2>Array Operations</h2>
+        
+        <div>
+            <h3>Current Array: <span id="arrayDisplay">[ ]</span></h3>
+        </div>
+
+        <div>
+            <label for="valueInput">Enter a value:</label>
+            <input type="number" id="valueInput" placeholder="Enter a number">
+        </div>
+
+        <button onclick="addValue()">Add Value</button>
+        <button onclick="removeValue()">Remove Value</button>
+        <button onclick="checkValue()">Check Value</button>
+        <button onclick="emptyArray()">Empty Array</button>
+
+        <div id="message" style="margin-top: 20px; font-weight: bold;"></div>
+    </center>
+
+    <script>
+        let myArray = [];
+
+        function updateArrayDisplay() {
+            const arrayDisplay = document.getElementById('arrayDisplay');
+            if (myArray.length === 0) {
+                arrayDisplay.innerHTML = '[ ]';
+                arrayDisplay.style.color = '#999';
+            } else {
+                arrayDisplay.innerHTML = `[${myArray.join(", ")}]`;
+                arrayDisplay.style.color = '#333';
+            }
+        }
+
+        function getInput() {
+            const inputValue = document.getElementById('valueInput').value.trim();
+            const messageDiv = document.getElementById('message');
+
+            if (inputValue === '') {
+                messageDiv.style.color = 'red';
+                messageDiv.innerHTML = 'Please enter a value first!';
+                return null;
+            }
+
+            const number = parseInt(inputValue);
+
+            if (isNaN(number)) {
+                messageDiv.style.color = 'red';
+                messageDiv.innerHTML = 'Please enter a valid number!';
+                return null;
+            }
+
+            return number;
+        }
+
+        function addValue() {
+            const numberToAdd = getInput();
+            if (numberToAdd === null) return;
+
+            const messageDiv = document.getElementById('message');
+
+            myArray.push(numberToAdd);
+            updateArrayDisplay();
+
+            messageDiv.style.color = 'green';
+            messageDiv.innerHTML = `Successfully added ${numberToAdd} to the array<br>Current array: [${myArray.join(", ")}]<br>Array now has ${myArray.length} element(s)`;
+
+            document.getElementById('valueInput').value = '';
+        }
+
+        function removeValue() {
+            const numberToRemove = getInput();
+            if (numberToRemove === null) return;
+
+            const messageDiv = document.getElementById('message');
+
+            if (myArray.length === 0) {
+                messageDiv.style.color = 'orange';
+                messageDiv.innerHTML = 'Array is empty! Please add values first.';
+                return;
+            }
+
+            const index = myArray.indexOf(numberToRemove);
+
+            if (index !== -1) {
+                myArray.splice(index, 1);
+                updateArrayDisplay();
+                messageDiv.style.color = 'green';
+                messageDiv.innerHTML = `Successfully removed ${numberToRemove} from the array<br>Current array: [${myArray.join(", ")}]<br>Array now has ${myArray.length} element(s)`;
+            } else {
+                messageDiv.style.color = 'red';
+                messageDiv.innerHTML = `Value ${numberToRemove} not found in the array<br>Current array: [${myArray.join(", ")}]`;
+            }
+
+            document.getElementById('valueInput').value = '';
+        }
+
+        function checkValue() {
+            const numberToCheck = getInput();
+            if (numberToCheck === null) return;
+
+            const messageDiv = document.getElementById('message');
+
+            if (myArray.length === 0) {
+                messageDiv.style.color = 'orange';
+                messageDiv.innerHTML = 'Array is empty! Please add values first.';
+                return;
+            }
+
+            const exists = myArray.includes(numberToCheck);
+
+            if (exists) {
+                const index = myArray.indexOf(numberToCheck);
+                messageDiv.style.color = 'green';
+                messageDiv.innerHTML = `Value ${numberToCheck} exists in the array at index ${index}<br>Current array: [${myArray.join(", ")}]`;
+            } else {
+                messageDiv.style.color = 'red';
+                messageDiv.innerHTML = `Value ${numberToCheck} does not exist in the array<br>Current array: [${myArray.join(", ")}]`;
+            }
+
+            document.getElementById('valueInput').value = '';
+        }
+
+        function emptyArray() {
+            const messageDiv = document.getElementById('message');
+
+            if (myArray.length === 0) {
+                messageDiv.style.color = 'orange';
+                messageDiv.innerHTML = 'Array is already empty!';
+                return;
+            }
+
+            const previousLength = myArray.length;
+            myArray = [];
+            updateArrayDisplay();
+
+            messageDiv.style.color = 'green';
+            messageDiv.innerHTML = `Array emptied successfully!<br>Removed ${previousLength} element(s)<br>Current array: [ ]`;
+
+            document.getElementById('valueInput').value = '';
+        }
+
+        // Initialize display on page load
+        updateArrayDisplay();
+    </script>
+</body>
+</html>

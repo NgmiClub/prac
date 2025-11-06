@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Handler</title>
+    <style>
+        * {
+            text-align: center;
+        }
+        p {
+            font-size: 28px;
+        }
+        h1, p {
+            display: inline;
+            cursor: pointer;
+        }
+        input {
+            padding: 8px;
+            font-size: 16px;
+            margin: 10px;
+        }
+        #message {
+            margin-top: 20px;
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 onmouseover="myFunction()" onmouseout="reset()">Event Handler</h1><br><br>
+    <p onmouseover="myFunction()" onmouseout="reset()">Name: Raj Pawar</p><br><br>
+    <p onmouseover="myFunction()" onmouseout="reset()">Roll no.: 42152</p><br><br>
+    <p onmouseover="myFunction()" onmouseout="reset()">Enter your Batch:</p><br><br>
+    <input id="batch" type="text" onfocus="mybox()" onblur="boxreset()">
+    <div id="message"></div>
+
+    <script>
+        function myFunction() {
+            document.body.style.backgroundColor = "yellow";
+        }
+
+        function reset() {
+            document.body.style.backgroundColor = "#fff";
+        }
+
+        function mybox() {
+            const batchInput = document.getElementById('batch').value.trim();
+            const message = document.getElementById('message');
+            
+            document.body.style.backgroundColor = "cyan";
+            document.getElementById('batch').style.backgroundColor = "coral";
+            
+            if (batchInput === '') {
+                message.textContent = 'Please enter your batch!';
+            } else {
+                message.textContent = '';
+            }
+        }
+
+        function boxreset() {
+            const batchInput = document.getElementById('batch').value.trim();
+            const message = document.getElementById('message');
+            
+            document.body.style.backgroundColor = "#fff";
+            document.getElementById('batch').style.backgroundColor = "#fff";
+            
+            if (batchInput === '') {
+                message.textContent = 'Please enter your batch!';
+            } else {
+                message.textContent = '';
+            }
+        }
+    </script>
+</body>
+</html>

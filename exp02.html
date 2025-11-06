@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Multiplication Table</title>
+</head>
+
+<body>
+    <h2>Multiplication Table Generator</h2>
+    <label for="numberInput">Enter a number:</label>
+    <input type="number" id="numberInput" placeholder="e.g., 5">
+    <br><br>
+
+    <label>Select Loop Type:</label><br>
+
+    <input type="radio" id="forLoop" name="loopType" value="for" checked>
+    <label for="forLoop">For Loop</label><br>
+    <input type="radio" id="whileLoop" name="loopType" value="while">
+    <label for="whileLoop">While Loop</label><br>
+    <input type="radio" id="doWhileLoop" name="loopType" value="dowhile">
+    <label for="doWhileLoop">Do-While Loop</label><br><br>
+
+    <button onclick="generateTable()">Generate Table</button>
+    <div id="messageOutput"></div>
+    <div id="tableOutput"></div>
+
+    <script>
+        function generateTable() {
+            const number = parseInt(document.getElementById('numberInput').value);
+            const loopType = document.querySelector('input[name="loopType"]:checked').value;
+            const tableOutput = document.getElementById('tableOutput');
+            const messageOutput = document.getElementById('messageOutput');
+
+            // Clear previous outputs
+            tableOutput.innerHTML = '';
+            messageOutput.innerHTML = '';
+
+            if (isNaN(number)) {
+                messageOutput.innerText = 'Please enter a valid number.';
+                return;
+            }
+            if(number == 0)
+            {
+                messageOutput.innerText = 'Multiplication table for 0 is always 0.';
+                return;
+            }
+
+            let tableHTML = `<h3>Multiplication Table of ${number}</h3><ul>`;
+
+            if (loopType === 'for') {
+                for (let i = 1; i <= 10; i++) {
+                    tableHTML += `<li>${number} x ${i} = ${number * i}</li>`;
+                }
+            } else if (loopType === 'while') {
+                let i = 1;
+                while (i <= 10) {
+                    tableHTML += `<li>${number} x ${i} = ${number * i}</li>`;
+                    i++;
+                }
+            } else if (loopType === 'dowhile') {
+                let i = 1;
+                do {
+                    tableHTML += `<li>${number} x ${i} = ${number * i}</li>`;
+                    i++;
+                } while (i <= 10);
+            }
+
+            tableHTML += '</ul>';
+            tableOutput.innerHTML = tableHTML;
+        }
+    </script>    
+</body>
+</html>

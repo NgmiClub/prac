@@ -1,0 +1,183 @@
+exp 4 mvm
+library IEEE; 
+use IEEE.STD_LOGIC_1164.ALL; 
+use IEEE.NUMERIC_STD.ALL; 
+ 
+entity fifo is 
+generic (depth : integer := 16);  --depth of fifo 
+port (    clk : in std_logic; 
+          reset : in std_logic; 
+          enr : in std_logic;   --enable read,should be '0' when not in use. 
+          enw : in std_logic;    --enable write,should be '0' when not in use. 
+          data_in : in std_logic_vector (7 downto 0);     --input data 
+          data_out : out std_logic_vector(7 downto 0);    --output data 
+          fifo_empty : out std_logic;     --set as '1' when the queue is empty 
+          fifo_full : out std_logic     --set as '1' when the queue is full 
+         ); 
+end fifo; 
+ 
+architecture fifo_arch of fifo is 
+ 
+type memory_type is array (0 to depth-1) of std_logic_vector(7 downto 0); 
+signal memory : memory_type :=(others => (others => '0'));   --memory for queue. 
+signal readptr,writeptr : integer := 0;  --read and write pointers. 
+signal empty,full : std_logic := '0'; 
+ 
+begin 
+ 
+fifo_empty <= empty; 
+fifo_full <= full; 
+ 
+process(Clk,reset) --this is the number of elements stored in fifo at a time. --this variable is used to decide whether the fifo is empty or full. 
+variable num_elem : integer := 0;   
+begin 
+if(reset = '1') then 
+ --    for i in 0 to depth-1 loop --    --     memory(i)<=(others=>'0'); --   end loop; 
+ memory <= (others => (others=> '0')); 
+     
+    data_out <= (others => '0'); 
+  empty <= '1'; 
+    full <= '0'; 
+    readptr <= 0; 
+    writeptr <= 0; 
+    num_elem := 0; 
+elsif(rising_edge(Clk)) then 
+    if(enr = '1' and empty = '0') then  --read
+	 
+        data_out <= memory(readptr); 
+        readptr <= readptr + 1;       
+        num_elem := num_elem-1; 
+    end if; 
+    if(enw ='1' and full = '0') then    --write 
+        memory(writeptr) <= data_in; 
+        writeptr <= writeptr + 1;   
+        num_elem := num_elem+1; 
+    end if; 
+    --rolling over of the indices. 
+    if(readptr = depth-1) then      --resetting read pointer. 
+        readptr <= 0; 
+    end if; 
+    if(writeptr = depth-1) then        --resetting write pointer. 
+        writeptr <= 0; 
+    end if;  
+    --setting empty and full flags. 
+    if(num_elem = 0) then 
+        empty <= '1'; 
+    else 
+        empty <= '0'; 
+    end if; 
+    if(num_elem = depth) then 
+        full <= '1'; 
+    else 
+        full <= '0'; 
+    end if; 
+end if;  
+end process; 
+ 
+end fifo_arch; 
+
+
+
+
+#TVM
+LIBRARY ieee; 
+USE ieee.std_logic_1164.ALL; 
+USE ieee.std_logic_arith.ALL; 
+ 
+ENTITY fifo_tb IS 
+END fifo_tb; 
+ 
+ARCHITECTURE behavior OF fifo_tb IS  
+   --Inputs and outputs 
+   signal Clk,reset,enr,enw,empty,full : std_logic := '0'; 
+   signal data_in,data_out : std_logic_vector(7 downto 0) := (others => '0'); 
+    --temporary signals 
+    signal i : integer := 0; 
+   -- Clock period definitions 
+   constant Clk_period : time := 10 ns; 
+    constant depth : integer := 16;  --specify depth of fifo here. 
+ 
+BEGIN 
+ 
+    -- Instantiate the Unit Under Test (UUT) 
+   uut: entity work.fifo generic map(depth => depth) PORT MAP 
+(clk,reset,enr,enw,data_in,data_out,empty,full); 
+ 
+   -- Clock process definitions 
+   Clk_process :process 
+   begin 
+        Clk <= '0'; 
+        wait for Clk_period/2; 
+        Clk <= '1'; 
+        wait for Clk_period/2; 
+   end process; 
+ 
+   -- Stimulus process 
+   stim_proc: process 
+   begin         
+        reset <= '1';  --apply reset for one clock cycle. 
+        wait for clk_period; 
+        reset <= '0'; 
+        wait for clk_period*3;  --wait for 3 clock periods(simply) 
+        enw <= '1';     enr <= '0';         --write 10 values to fifo. 
+      for i in 1 to 10 loop   
+            Data_In <= conv_std_logic_vector(i,8); 
+            wait for clk_period; 
+      end loop;  
+        enw <= '0';     enr <= '1';         --read 4 values from fifo. 
+      wait for clk_period*4; 
+        enw <= '0';     enr <= '0';  
+        wait for clk_period*10;  --wait for some clock cycles. 
+        enw <= '1';     enr <= '0';         --write 10 values to fifo. 
+      for i in 11 to 20 loop   
+            Data_In <= conv_std_logic_vector(i,8); 
+            wait for clk_period; 
+      end loop;  
+        enw <= '0';     enr <= '0';  
+        wait for clk_period*10;  --wait for some clock cycles. 
+        enw <= '0';     enr <= '1';         --read 4 values from fifo. 
+      wait for clk_period*4; 
+        enw <= '0';     enr <= '0'; 
+        wait for clk_period; 
+        enw <= '0';     enr <= '1';         --read 4 values from fifo. 
+      wait for clk_period*8; 
+        enw <= '0';     enr <= '0';  
+        wait for clk_period; 
+        enw <= '0';     enr <= '1';         --read 8 values from fifo. 
+      wait for clk_period*4; 
+        enw <= '0';     enr <= '0';  
+        wait for clk_period; 
+        enw <= '0';     enr <= '1';         --read 4 values from fifo. 
+      wait for clk_period*4; 
+        enw <= '0';     enr <= '0';      
+        wait; 
+   end process; 
+ 
+END; 
+
+
+
+
+UCF
+NET "data_in[7]" LOC = P165; #sw4-0 
+NET "data_in[6]" LOC = P167; #sw4-1 
+NET "data_in[5]" LOC = P163; #sw4-2 
+NET "data_in[4]" LOC = P164; 
+NET "data_in[3]" LOC = P161; 
+NET "data_in[2]" LOC = P162; 
+NET "data_in[1]" LOC = P160; 
+NET "data_in[0]" LOC = P153; #sw4-7 
+NET "data_out[7]" LOC = P179; #sw3-0 
+NET "data_out[6]" LOC = P180; #sw3-1 
+NET "data_out[5]" LOC = P177; 
+NET "data_out[4]" LOC = P178; 
+NET "data_out[3]" LOC = P152; 
+NET "data_out[2]" LOC = P168; 
+NET "data_out[1]" LOC = P171; 
+NET "data_out[0]" LOC = P172; #sw3-7 
+NET "clk" LOC = P132; 
+NET "reset" LOC = P204; #k0 
+NET "enr" LOC = P184;  #sw2-6 
+NET "enw" LOC = P194;  #sw2-7 
+NET "fifo_empty" LOC = P199;#sw1-6 
+NET "fifo_full" LOC = P196; #sw1-7 

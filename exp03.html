@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>String Operations</title>
+</head>
+<body>
+
+    <h2>String Operations</h2>
+
+    <div>
+        <h3>1. Reverse String</h3>
+        <input type="text" id="inputString" placeholder="Enter a string">
+        <button onclick="reverseString()">Reverse String</button>
+        <div id="reverseResult"></div>
+    </div>
+
+    <div>
+        <h3>2. Replace Character</h3>
+        <input type="text" id="replaceInputString" placeholder="Enter a string">
+        <input type="text" id="oldChar" placeholder="Character to replace" maxlength="1">
+        <input type="text" id="newChar" placeholder="Replace with" maxlength="1">
+        <button onclick="replaceChar()">Replace Character</button>
+        <div id="replaceResult"></div>
+    </div>
+
+    <div>
+        <h3>3. Check Palindrome</h3>
+        <input type="text" id="palindromeInputString" placeholder="Enter a string">
+        <button onclick="checkPalindrome()">Check Palindrome</button>
+        <div id="palindromeResult"></div>
+    </div>
+
+    <script>
+
+        function reverseString() {
+            const str = document.getElementById('inputString').value;
+            if (str.trim() === '') {
+                document.getElementById('reverseResult').innerText = 'Please enter a valid string.';
+                return;
+            }
+            const reversed = str.split('').reverse().join('');
+            document.getElementById('reverseResult').innerText = `Reversed String: ${reversed}`;
+        }
+
+        function replaceChar() {
+            const str = document.getElementById('replaceInputString').value;
+            const oldChar = document.getElementById('oldChar').value;
+            const newChar = document.getElementById('newChar').value;
+
+            if (oldChar.length === 0 || newChar.length === 0) {
+                document.getElementById('replaceResult').innerText = 'Please enter proper strings for replacement.';
+                return;
+            }
+
+            // check if oldChar exists in str
+            if (!str.includes(oldChar)) {
+                document.getElementById('replaceResult').innerText = `Character "${oldChar}" not found in the string.`;
+                return;
+            }
+
+            // Replace all occurrences of oldChar with newChar
+            const replacedStr = str.split(oldChar).join(newChar);
+            document.getElementById('replaceResult').innerText = `Modified String: ${replacedStr}`;
+        }
+
+        function checkPalindrome() {
+            const str = document.getElementById('palindromeInputString').value;
+            if (str.trim() === '') {
+                document.getElementById('palindromeResult').innerText = 'Please enter a valid string.';
+                return;
+            }
+            
+            const cleanedStr = str.replace(/[\W_]/g, '').toLowerCase();
+            const reversedStr = cleanedStr.split('').reverse().join('');
+            const isPalindrome = cleanedStr === reversedStr;
+
+            document.getElementById('palindromeResult').innerText = isPalindrome ? 
+                `"${str}" is a palindrome.` : 
+                `"${str}" is not a palindrome.`;
+        }
+    </script>
+</body>
+</html>
